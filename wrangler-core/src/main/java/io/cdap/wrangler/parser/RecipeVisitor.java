@@ -97,6 +97,16 @@ public final class RecipeVisitor extends DirectivesBaseVisitor<RecipeSymbol.Buil
     return super.visitIdentifier(ctx);
   }
 
+  @Override
+public TokenGroup visitByteSizeArg(DirectivesParser.ByteSizeArgContext ctx) {
+  return new TokenGroup(new ByteSize(ctx.BYTE_SIZE().getText()));
+}
+
+@Override
+public TokenGroup visitTimeDurationArg(DirectivesParser.TimeDurationArgContext ctx) {
+  return new TokenGroup(new TimeDuration(ctx.TIME_DURATION().getText()));
+}
+
   /**
    * A Directive can include properties (which are a collection of key and value pairs),
    * this method extracts that token that is being identified as token of type <code>Properties</code>.

@@ -49,6 +49,13 @@ statements
  :  ( Comment | macro | directive ';' | pragma ';' | ifStatement)*
  ;
 
+BYTE_SIZE : NUMBER BYTE_UNIT ;
+TIME_DURATION : NUMBER TIME_UNIT ;
+
+// Helper fragments
+fragment BYTE_UNIT : [kKmMgGtTpP]?'B' | [kK][bB] | [mM][bB] | [gG][bB] | [tT][bB] | [pP][bB] ;
+fragment TIME_UNIT : 'ns' | 'ms' | 's' | 'm' | 'h' | 'd' ;
+
 directive
  : command
   (   codeblock
@@ -140,8 +147,12 @@ numberRange
  ;
 
 value
- : String | Number | Column | Bool
- ;
+    : NUMBER
+    | STRING
+    | IDENTIFIER
+    | BYTE_SIZE
+    | TIME_DURATION
+    ;
 
 ecommand
  : '!' Identifier
